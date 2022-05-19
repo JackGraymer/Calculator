@@ -28,6 +28,8 @@ img{
     height: 700px;
     padding: 3em;
     background-color: rgba(255, 166, 0, 0.596);   
+    border: 2px solid rgba(51, 49, 49, 0.671);
+    box-shadow: 0px 0px 20px 1px rgba(255, 166, 0, 0.596);  
 }
 
 .screen{
@@ -35,15 +37,14 @@ img{
     width: 100%;
     height: 18%;
     background-color: rgba(235, 226, 175, 0.815);
-    border: solid 2px grey;
+    border: solid 2px rgba(51, 49, 49, 0.8);
 }
 
 .pannel{
     margin-top: 3em;
     width: 100%;
     height: auto;
-/*     background-color: rgba(255, 166, 0, 0.493);   
- */    display: grid;
+    display: grid;
     gap: 1em;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -66,7 +67,7 @@ img{
     background-color: rgba(255, 255, 255, 0.74);
     display: flex;
     padding: 0.3em;
-    border: 2px solid black;
+    border: 2px solid rgba(51, 49, 49, 0.8);
     border-radius: 1rem;
     font-size: 1cm;
     justify-content: center;
