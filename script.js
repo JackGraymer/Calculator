@@ -1,4 +1,12 @@
-let sum = function (a, b){ //Sum of 2 numbers
+let operation ;
+
+function solution() {
+    result = operation(a,b)
+    screenValue = Math.round(result * 100) / 100;
+    updateBottomScreen(screenValue)
+}
+
+function sum (a, b){ //Sum of 2 numbers
     return a + b;
 }
 
@@ -14,25 +22,30 @@ function divide(a, b){//Division of 2 numbers
     return a / b;
 }
 
+function updateBottomScreen(val = screenValue) {
+    document.querySelector('.screenBottom').textContent = val;
+}
 /* let screenValue = document.querySelector('.screenBottom'); */
 
-let screenStage = document.querySelector('.screenTop').textContent;
+let screenStage = document.querySelector('.screenTop');
 
 let digits = document.querySelectorAll('.digit');
 
 let operators = document.querySelectorAll('.operator');
 
-let a = 0;
-let b = 0;
-
+let a = '';
+let b = '';
+let result = '';
 //Writing in the screen with calculator number buttons
 
 let screenValue = document.querySelector('.screenBottom').textContent;
-//document.querySelector('.screenBottom').textContent = screenValue;
 
 digits.forEach(digit => { digit.addEventListener('click', () => {
+    if (b !== ''){
+        clear();
+    }
     screenValue = screenValue + event.target.textContent
-    document.querySelector('.screenBottom').textContent = screenValue
+    updateBottomScreen();
     console.log(screenValue)
 })})
 
@@ -41,25 +54,61 @@ digits.forEach(digit => { digit.addEventListener('click', () => {
 operators.forEach(operator => { operator.addEventListener('click', () => {
     a = Number(screenValue)
     console.log(a)
+    b = '';
     screenValue = '';
-
+    screenStage.textContent = a + ' ' + event.target.id;
+    /* if (event.target.id === '+'){
+        console.log('fuck yeah')
+        operation = substract
+        console.log(operation(a,b));
+    } */
+    switch(event.target.id){
+        case'+':
+            operation = sum;
+            break;
+        case '-':
+            operation = substract;
+            break;
+        case '*':
+            operation = multiply;
+            break;
+        case '/':
+            operation = divide
+            break
+    }
     })
+})
+
+// Equal button to calculate the solution of the operation and show the result on screen
+document.querySelector('#equal').addEventListener('click', () => {
+    if (a !== ''){
+    b = Number(screenValue);
+    screenStage.textContent = screenStage.textContent + ' ' + b
+    console.log('working?')
+    solution();
+    a = '';
+}
 })
 
 //Clear button cleans screens and all stored data variables
 
-document.querySelector('#clear').addEventListener('click', () => {
-    a = 0;
-    b = 0;
+document.querySelector('#clear').addEventListener('click', clear)
+function clear() {
+    a = '';
+    b = '';
+    result = '';
     screenValue = '';
-    document.querySelector('.screenBottom').textContent = '';
-    screenStage = '';
-    document.querySelector('.screenTop').textContent = '';
-})
+    updateBottomScreen();
+    screenStage.textContent = '';
+    //document.querySelector('.screenTop').textContent = '';
+    return;
+}
 
 //Delete / return button deletes the top right / lattest number on screen
 
 document.querySelector('#back').addEventListener('click', () => {
-    //editedText = text.slice(0, -1)
-    console.log('deleteworsks')
+    screenValue = screenValue.slice(0, -1)
+    document.querySelector('.screenBottom').textContent = screenValue
+    //console.log('deleteworsks')
 })
+
