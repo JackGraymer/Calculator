@@ -52,7 +52,9 @@ img{
     justify-content: end;
 }
 
-.screenBotton{
+.screenBottom{
+    overflow:hidden;
+    letter-spacing:-2px;
     border-radius: 4pt;
     font-size: 3em;
     display: flex;
@@ -84,6 +86,7 @@ img{
 }
 
 .btn{
+    z-index: 1000;
     background-color: rgba(255, 255, 255, 0.74);
     display: flex;
     padding: 0.3em;
@@ -115,6 +118,14 @@ img{
 
 .operator:hover{
     background-color: rgba(67, 226, 213, 0.938)
+}
+
+.equal{
+    background-color: rgba(42, 99, 204, 0.856)
+}
+
+.equal:hover{
+    background-color: rgb(5, 87, 238)
 }
 
 .footer{
