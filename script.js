@@ -25,7 +25,6 @@ function divide(a, b){//Division of 2 numbers
 function updateBottomScreen(val = screenValue) {
     document.querySelector('.screenBottom').textContent = val;
 }
-/* let screenValue = document.querySelector('.screenBottom'); */
 
 let screenStage = document.querySelector('.screenTop');
 
@@ -40,7 +39,7 @@ let result = '';
 
 let screenValue = document.querySelector('.screenBottom').textContent;
 
-digits.forEach(digit => { digit.addEventListener('click', () => {
+digits.forEach(digit => { digit.addEventListener('click', function() {
     if (result !== '' && screenValue == result){
         clear();
     } 
