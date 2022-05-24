@@ -41,9 +41,9 @@ let result = '';
 let screenValue = document.querySelector('.screenBottom').textContent;
 
 digits.forEach(digit => { digit.addEventListener('click', () => {
-    if (b !== ''){
+    if (result !== '' && screenValue == result){
         clear();
-    }
+    } 
     screenValue = screenValue + event.target.textContent
     updateBottomScreen();
     console.log(screenValue)
@@ -52,16 +52,27 @@ digits.forEach(digit => { digit.addEventListener('click', () => {
 //Operator buttons set screen value to A and chose an operation
 
 operators.forEach(operator => { operator.addEventListener('click', () => {
-    a = Number(screenValue)
-    console.log(a)
-    b = '';
-    screenValue = '';
-    screenStage.textContent = a + ' ' + event.target.id;
-    /* if (event.target.id === '+'){
-        console.log('fuck yeah')
-        operation = substract
-        console.log(operation(a,b));
-    } */
+   
+    let operator = event.target.id
+    if(screenValue ==''){
+        screenStage.textContent = screenStage.textContent.slice(0,-1) + operator
+    }else if(screenValue !=='' && screenStage.textContent !==''){
+        console.log('this might just work')
+        equal()
+        a = Number(screenValue);
+        screenStage.textContent = a + ' ' + operator;
+        screenValue = ''
+        updateBottomScreen();
+        //return
+    }else {if(screenValue !==''){
+        console.log('on our way')
+        a = Number(screenValue);
+        screenStage.textContent = a + ' ' + operator;
+        screenValue = ''
+        updateBottomScreen();
+        console.log(a);
+    }}    
+    
     switch(event.target.id){
         case'+':
             operation = sum;
@@ -80,15 +91,18 @@ operators.forEach(operator => { operator.addEventListener('click', () => {
 })
 
 // Equal button to calculate the solution of the operation and show the result on screen
-document.querySelector('#equal').addEventListener('click', () => {
+document.querySelector('#equal').addEventListener('click', equal)
+function equal() {
     if (a !== ''){
     b = Number(screenValue);
     screenStage.textContent = screenStage.textContent + ' ' + b
     console.log('working?')
     solution();
+    operator = '';
     a = '';
+    //b = '';
+    }
 }
-})
 
 //Clear button cleans screens and all stored data variables
 
@@ -107,7 +121,8 @@ function clear() {
 //Delete / return button deletes the top right / lattest number on screen
 
 document.querySelector('#back').addEventListener('click', () => {
-    screenValue = screenValue.slice(0, -1)
+    screenValue = screenValue.toString();
+    screenValue = screenValue.slice(0, -1);
     document.querySelector('.screenBottom').textContent = screenValue
     //console.log('deleteworsks')
 })
